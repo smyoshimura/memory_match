@@ -10,6 +10,11 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
+    cursor: default;
+}
+
+.hidden {
+    di
 }
 
 a:link {
@@ -49,26 +54,58 @@ a:visited {
     padding: 0;
 }
 
-header img {
+header h1 {
     float: left;
     margin: 0;
     padding: 1%;
-    height: 50px;
-    width: 50px;
 }
 
-.game_menu ul {
+.game_menu > ul {
+    float: left;
     margin: 0;
-    padding: 0;
+    padding: 1%;
 }
 
 .game_menu ul li {
     list-style: none;
     display: inline-block;
-    font-size: 3vw;
+    font-size: 22px;
     padding-left: 35px;
+    float: left;
 }
 
+/*Settings Drop Down Menu*/
+#settings-menu:hover > a {
+    color: ghostwhite;
+
+}
+
+ul > li#settings-menu {
+    position: relative;
+}
+
+#settings-menu > ul {
+    display: none;
+    height: 100px;
+}
+
+#settings-menu:hover > ul {
+    display: block;
+    position: absolute;
+    top: 35px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+ul > li.settings-sub {
+    padding: 0;
+    margin: 0;
+    height: 40%;
+    font-size: 15px;
+}
+
+/*****/
 main {
     position: absolute;
 }
@@ -86,18 +123,38 @@ main {
 }
 
 .reset {
+    font-family: metropolian, serif;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
     display: inline-block;
-    padding: 0 10px;
-    border: 3px solid rgba(255,255,255,0.2);
-    text-align: center;
-    text-decoration: none;
+    padding: 6%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    cursor: pointer;
     transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
 }
 
 .reset:hover {
-    background-color: rgba(255,255,255,0.2);
-    border-color: rgba(255,255,255,0.4)
-    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
+    color: ghostwhite;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transition : background-color 0.3s ease-in, border-color 0.3s ease-in;
+}
+
+.reset:active {
+    color: black;
+    background-color: transparent;
+}
+
+#win-message {
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: 160px;
+    left: 30px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color .5s ease-in;
 }
 
 #game-area {
@@ -122,30 +179,32 @@ main {
     background-size: 100% 100%;
 }
 
-.card img {
-    height: inherit;
-    width: inherit;
-    position: absolute;
-}
-
 .front img, .back img {
     height: 154px;
     width: 108px;
     top: 21px;
     left: 16px;
+    position: absolute;
+    backface-visibility: hidden;
 }
 
-.front, .back {
+.front, .back, .matched {
     position: absolute;
     backface-visibility: hidden;
 }
 
 .front {
-
+    opacity: 0;
+    filter: blur(10px) grayscale(100%);
+    -webkit-filter: blur(10px) grayscale(100%);
+    transition: 1.5s ease-out;
 }
 
 .back {
     opacity: 1;
+    filter: blur(0) grayscale(0);
+    -webkit-filter: blur(0) grayscale(0);
+    transition: 1.5s ease-out;
 }
 
 #foreground {
@@ -161,22 +220,25 @@ main {
     position: absolute;
     bottom: 40px;
     left: 30px;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .selected_card {
 }
 
-/*card animations
 .back_effect {
-    opacity: 0.5;
+    opacity: 0;
+    filter: blur(10px) grayscale(100%);
+    -webkit-filter: blur(10px) grayscale(100%);
+    transition: .5s ease-in;
 }
 
 .front_effect {
     opacity: 1;
-    transition-duration: 2s;
+    filter: blur(0) grayscale(0);
+    -webkit-filter: blur(0) grayscale(0);
+    transition: .5s ease-in;
 }
-*/
 
 /* about.html */
 
@@ -191,22 +253,32 @@ main {
     height: 450px;
     width: 60%;
     padding: 2%;
-    margin: 2% auto;
-    line-height: 30px;
+    margin: 1% auto;
+    line-height: 25px;
     border: 20px;
 }
 
+.about img {
+    height: 50%;
+}
+
 .about ul {
-    padding: 0;
+    padding: 4% 0 3% 0;
     margin: 0;
+}
+
+#skills {
+    font-weight: bold;
 }
 
 .about li {
     margin: 0;
     padding-bottom: 2%;
     list-style: none;
+    font-size: 14px;
+    line-height: 15px;
 }
 
 p {
-    margin: 2%;
+    margin: 1%;
 }
