@@ -62,8 +62,6 @@ var gameController = function () {
     self.tempCard = new Cards();
 
     self.populateBoard = function (size, controller, stats) {
-        console.log(size);
-
         $('.game_row').html('');
 
         var tempCard = '<div class="card"><div class="front"></div><div class="back"><img src="images/cardback.jpg" alt="card"></div></div>';
@@ -84,7 +82,7 @@ var gameController = function () {
             });
         }
 
-        $(".back").click(function () {
+        $("#game-area").on('click', '.back', function () {
             newController.cardClicked(this, gameStats);
         });
 
@@ -93,8 +91,11 @@ var gameController = function () {
     };
 
     self.cardClicked = function (card, stats) {
-
         if ($(card).hasClass("matched") == true || $(card).hasClass("selected_card") == true) {
+            return
+        }
+
+        if (self.secondCardClicked !== null) {
             return
         }
 
@@ -123,13 +124,15 @@ var gameController = function () {
             }
 
             else {
-                $(".back").off("click", self.cardClicked);
+                $("#game-area").off('click', '.back');
                 setTimeout(function () {
                     self.tempCard.cardTransitionEffect(".selected_card");
                     $(".selected_card").show();
                     self.firstCardClicked = null;
                     self.secondCardClicked = null;
-                    $(".back").removeClass("selected_card").on("click", self.cardClicked);
+                    $(".back").removeClass("selected_card").on('click', function() {
+                        newController.cardClicked(this, gameStats);
+                    });
                 }, 1500);
             }
         }
@@ -154,6 +157,10 @@ var gameController = function () {
     };
 };
 
+//Misc
+var gameStats = new Stats();
+var newController = new gameController();
+
 //Document Ready
 $(document).ready(function () {
     newController.populateBoard('twelve_cards', newController, gameStats);
@@ -171,6 +178,3 @@ $(document).ready(function () {
     gameStats.displayStats(newController);
 });
 
-//Misc
-var gameStats = new Stats();
-var newController = new gameController();
